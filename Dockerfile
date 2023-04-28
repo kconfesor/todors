@@ -1,18 +1,13 @@
 # Use the official Rust image as the base image
 FROM rust:latest as build
-RUN cargo install diesel_cli --no-default-features --features postgres
 
-# Copy the Cargo manifest files
 WORKDIR /usr/src/todors
 COPY . .
 
-#RUN apt-get clean
 RUN apt-get update && apt-get install libpq5 -y
-# Build application
 RUN cargo build --release
 
 FROM gcr.io/distroless/cc-debian11
-
 ARG ARCH=aarch64
 
 # libpq related (required by diesel)
