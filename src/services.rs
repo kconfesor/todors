@@ -35,7 +35,7 @@ pub async fn create_todo(state: Data<AppState>, body: Json<CreateTodo>) -> impl 
 
     match body
     {
-        body if body.title.is_empty() => HttpResponse::BadRequest().json("Email field is empty"),
+        body if body.title.is_empty() => HttpResponse::BadRequest().json("Title field is empty"),
         body if body.user_email.is_empty() => HttpResponse::BadRequest().json("User email field is empty"),
         body if !EmailAddress::is_valid(&body.user_email) => HttpResponse::BadRequest().json("User email is not valid"),
         _ => match db.send(CreateTodo {

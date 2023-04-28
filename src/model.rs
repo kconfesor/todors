@@ -1,6 +1,6 @@
 use super::schema::todo;
 use diesel::prelude::*;
-use serde::{Serialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Queryable)]
 pub struct Todo {
@@ -24,4 +24,12 @@ pub struct NewTodo {
     pub created_at: chrono::NaiveDateTime,
     pub enabled: bool,
     pub completed: bool,
+}
+
+#[derive(Serialize, Deserialize)]
+pub struct Test {
+    pub title: String,
+    pub temp: i32,
+    pub humidity: i32,
+    pub enabled: bool,
 }
